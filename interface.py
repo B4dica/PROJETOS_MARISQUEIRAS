@@ -104,7 +104,7 @@ def main():
                 continue
             print("Produtos disponíveis:")
             for i, p in enumerate(produtos):
-                print(f"  {i+1} - {p.nome} (estoque: {p.quantidade} kg)")
+                print(f"  {i+1} - {p.nome} (estoque: {p.quantidade_disponivel} kg)")
             idx = int(input("Número do produto: ")) - 1
             nova_qtd = float(input("Nova quantidade (kg): "))
             produtos[idx].alterar_quantidade(nova_qtd)
@@ -129,7 +129,7 @@ def main():
                 continue
             print("Produtos disponíveis do vendedor:")
             for i, p in enumerate(vendedor.produtos):
-                print(f"  {i+1} - {p.nome} (R$ {p.preco}/kg, estoque: {p.quantidade} kg)")
+                print(f"  {i+1} - {p.nome} (R$ {p.preco}/kg, estoque: {p.quantidade_disponivel} kg)")
             escolhas = input("Digite os números dos produtos separados por vírgula (ex: 1,3): ").strip()
             prod_qtde = {}
             for num in escolhas.split(","):
@@ -153,7 +153,7 @@ def main():
                 print("Nenhum pedido realizado.")
                 continue
             print("Pedidos pendentes (status Recebido):")
-            pendentes = [p for p in pedidos if p.status == "Recebido"]
+            pendentes = [p for p in pedidos if p.status_pedido == "Recebido"]
             if not pendentes:
                 print("Nenhum pedido pendente.")
                 continue
@@ -169,9 +169,9 @@ def main():
                 print("Nenhum pedido.")
                 continue
             print("Pedidos aguardando decisão:")
-            pendentes = [p for p in pedidos if p.status in ("Recebido", "Aceito", "Rejeitado", "Ajuste Solicitado")]
+            pendentes = [p for p in pedidos if p.status_pedido in ("Recebido", "Aceito", "Rejeitado", "Ajuste Solicitado")]
             for i, p in enumerate(pendentes):
-                print(f"  {i+1} - {p.status} - {p.comprador.nome} -> {p.vendedor.nome}")
+                print(f"  {i+1} - {p.status_pedido} - {p.comprador.nome} -> {p.vendedor.nome}")
             idx = int(input("Número do pedido: ")) - 1
             pedido = pendentes[idx]
             # precisamos saber quem é o vendedor
@@ -183,9 +183,9 @@ def main():
                 print("Nenhum pedido.")
                 continue
             print("Pedidos aguardando decisão:")
-            pendentes = [p for p in pedidos if p.status in ("Recebido", "Aceito", "Rejeitado", "Ajuste Solicitado")]
+            pendentes = [p for p in pedidos if p.status_pedido in ("Recebido", "Aceito", "Rejeitado", "Ajuste Solicitado")]
             for i, p in enumerate(pendentes):
-                print(f"  {i+1} - {p.status} - {p.comprador.nome} -> {p.vendedor.nome}")
+                print(f"  {i+1} - {p.status_pedido} - {p.comprador.nome} -> {p.vendedor.nome}")
             idx = int(input("Número do pedido: ")) - 1
             pedido = pendentes[idx]
             vendedor = pedido.vendedor
@@ -197,9 +197,9 @@ def main():
                 print("Nenhum pedido.")
                 continue
             print("Pedidos aguardando decisão:")
-            pendentes = [p for p in pedidos if p.status in ("Recebido", "Aceito", "Rejeitado", "Ajuste Solicitado")]
+            pendentes = [p for p in pedidos if p.status_pedido in ("Recebido", "Aceito", "Rejeitado", "Ajuste Solicitado")]
             for i, p in enumerate(pendentes):
-                print(f"  {i+1} - {p.status} - {p.comprador.nome} -> {p.vendedor.nome}")
+                print(f"  {i+1} - {p.status_pedido} - {p.comprador.nome} -> {p.vendedor.nome}")
             idx = int(input("Número do pedido: ")) - 1
             pedido = pendentes[idx]
             vendedor = pedido.vendedor
@@ -212,7 +212,7 @@ def main():
                 continue
             print("Pedidos:")
             for i, p in enumerate(pedidos):
-                print(f"  {i+1} - {p.status} - Entrega: {p.status_entrega}")
+                print(f"  {i+1} - {p.status_pedido} - Entrega: {p.status_entrega}")
             idx = int(input("Número do pedido: ")) - 1
             pedido = pedidos[idx]
             vendedor = pedido.vendedor
@@ -251,7 +251,7 @@ def main():
                 print("Nenhum produto encontrado.")
             else:
                 for p in resultados:
-                    print(f"- {p.nome} ({p.categoria}) - R$ {p.preco}/kg - Estoque: {p.quantidade} kg - Empresa: {p.empresa.nome}")
+                    print(f"- {p.nome} ({p.categoria}) - R$ {p.preco}/kg - Estoque: {p.quantidade_disponivel} kg - Empresa: {p.empresa.nome}")
         elif escolha == "12":
             if not produtos:
                 print("Nenhum produto cadastrado.")
@@ -295,7 +295,7 @@ def main():
                 continue
             print("Produtos:")
             for i, p in enumerate(produtos):
-                print(f"  {i+1} - {p.nome} - Estoque: {p.quantidade} kg")
+                print(f"  {i+1} - {p.nome} - Estoque: {p.quantidade_disponivel} kg")
             idx = int(input("Número do produto: ")) - 1
             produto = produtos[idx]
             qtd = float(input("Quantidade desejada (kg): ").strip())
@@ -304,14 +304,14 @@ def main():
                 continue
             compradora = empresas_compradoras[0]
             disp = compradora.verificar_disponibilidade(produto, qtd)
-            print(f"Disponível? {'Sim' if disp else 'Não'} (estoque {produto.quantidade} kg)")
+            print(f"Disponível? {'Sim' if disp else 'Não'} (estoque {produto.quantidade_disponivel} kg)")
         elif escolha == "15":
             if not pedidos:
                 print("Nenhum pedido.")
                 continue
             print("Pedidos:")
             for i, p in enumerate(pedidos):
-                print(f"  {i+1} - {p.status}")
+                print(f"  {i+1} - {p.status_pedido}")
             idx = int(input("Número do pedido: ")) - 1
             pedido = pedidos[idx]
             if not produtos:
@@ -319,7 +319,7 @@ def main():
                 continue
             print("Produtos:")
             for i, p in enumerate(produtos):
-                print(f"  {i+1} - {p.nome} - Estoque: {p.quantidade} kg")
+                print(f"  {i+1} - {p.nome} - Estoque: {p.quantidade_disponivel} kg")
             p_idx = int(input("Número do produto: ")) - 1
             produto = produtos[p_idx]
             qtd = float(input("Quantidade (kg): ").strip())
