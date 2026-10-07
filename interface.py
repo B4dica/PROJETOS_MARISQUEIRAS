@@ -245,7 +245,7 @@ def main():
                 continue
             compradora = empresas_compradoras[0]
             resultados = compradora.consultar_produtos(vendedores, nome=nome_f, categoria=cat_f,
-                                                       empresa=emp_f, avaliacao_min=aval_f)
+                                                       empresa=emp_f, avaliacao_min=aval_min)
             print("\nResultado da consulta:")
             if not resultados:
                 print("Nenhum produto encontrado.")
