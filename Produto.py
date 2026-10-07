@@ -1,5 +1,5 @@
 class Produto:
-    def __init__(self, nome="", categoria="", preco=0.0, quantidade=0, empresa=None):
+    def __init__(self, nome, categoria, preco, quantidade, empresa):
         """
         categoria: 'fresco' ou 'congelado'
         quantidade: em kg
@@ -41,3 +41,8 @@ class Produto:
         if quantidade_solicitada > self.quantidade:
             return False, "Estoque insuficiente."
         return True, "Quantidade válida."
+
+
+
+produto = Produto("Marisco", "fresco", 30.00, 20, "MarisqueirasMA")
+produto.cadastrar_produto("Marisco", "fresco", 30.00, 20, "MarisqueirasMA")

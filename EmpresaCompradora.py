@@ -6,7 +6,7 @@ class EmpresaCompradora:
         self.cnpj = cnpj
         self.pedidos_realizados = []  # list of Pedido objects
         self.avaliacoes_dadas = []    # list of Avaliacao objects
-
+#vai herdar nome e localização, deixa apenas o cnpj
     def realizar_pedido(self, vendedor, produtos_quantidades, endereco_entrega, tempo_entrega):
         """
         Cria e realiza um pedido.

@@ -6,7 +6,7 @@ class Avaliacao:
         self.empresa_avaliadora = None  # EmpresaCompradora
         self.pedido = None  # Pedido relacionado
         self.data = None
-
+#id da avaliacao,nota 
     def registrar_nota(self, nota, comentario=""):
         """Registra a nota e comentário."""
         if not (1 <= nota <= 5):
