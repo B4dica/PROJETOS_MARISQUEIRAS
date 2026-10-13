@@ -12,15 +12,13 @@ class Produto:
         self.preco = preco  # preço por kg
         self.quantidade_disponivel = quantidade_disponivel  # estoque disponível em kg
         self.fotografia = fotografia  # opcional, não obrigatório conforme RN
-        self.empresa = None  # referência à empresa vendedora (será definida ao cadastrar)
 
-    def cadastrar_produto(self, nome, categoria, preco, quantidade_disponivel, empresa, fotografia=None):
+    def cadastrar_produto(self, nome, categoria, preco, quantidade_disponivel, fotografia=None):
         """Define os atributos do produto."""
         self.nome = nome
         self.categoria = categoria.lower()
         self.preco = preco
         self.quantidade_disponivel = quantidade_disponivel
-        self.empresa = empresa
         self.fotografia = fotografia
         # garante que tenha um ID
         if not self.id_produto:
