@@ -14,3 +14,19 @@ class Avaliacao:
     def avaliar_empresa(self):
         """Retorna a nota desta avaliação (média seria calculada na empresa)."""
         return self.nota
+
+if __name__ == "__main__":
+    # exemplo de uso
+    av = Avaliacao()
+    av.registrar_nota(4, "Produto de boa qualidade")
+    print("Avaliacao criada:")
+    print(f"  ID: {av.id_avaliacao}")
+    print(f"  Nota: {av.nota}")
+    # comentário não armazenado, portanto não exibido
+    # avaliar_empresa retorna a nota
+    print(f"  avaliar_empresa() retorna: {av.avaliar_empresa()}")
+    # testar nota inválida
+    try:
+        av.registrar_nota(6)
+    except ValueError as e:
+        print(f"\nErro ao registrar nota 6: {e}")

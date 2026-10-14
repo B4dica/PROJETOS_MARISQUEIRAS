@@ -46,3 +46,34 @@ class Produto:
         if quantidade_solicitada > self.quantidade_disponivel:
             return False, "Estoque insuficiente."
         return True, "Quantidade válida."
+
+if __name__ == "__main__":
+    # exemplo de uso
+    prod = Produto()
+    print("Produto criado (ID gerado automaticamente):", prod.id_produto)
+    # cadastrar produto
+    prod.cadastrar_produto(nome="Camarão", categoria="fresco", preco=50.0, quantidade_disponivel=100)
+    print("\nApós cadastrar_produto:")
+    print(f"  Nome: {prod.nome}")
+    print(f"  Categoria: {prod.categoria}")
+    print(f"  Preço: {prod.preco}")
+    print(f"  Quantidade disponível: {prod.quantidade_disponivel}")
+    print(f"  Fotografia: {prod.fotografia}")
+    # alterar quantidade
+    prod.alterar_quantidade(80)
+    print("\nApós alterar_quantidade(80):")
+    print(f"  Quantidade disponível: {prod.quantidade_disponivel}")
+    # atualizar quantidade (adicionar 20)
+    prod.atualizar_quantidade(20)
+    print("\nApós atualizar_quantidade(+20):")
+    print(f"  Quantidade disponível: {prod.quantidade_disponivel}")
+    # validar quantidade
+    valido, msg = prod.validar_quantidade(30)
+    print("\nValidar quantidade 30 kg:")
+    print(f"  Válido: {valido}, Mensagem: {msg}")
+    valido, msg = prod.validar_quantidade(200)
+    print("\nValidar quantidade 200 kg (deve falhar):")
+    print(f"  Válido: {valido}, Mensagem: {msg}")
+    valido, msg = prod.validar_quantidade(20)
+    print("\nValidar quantidade 20 kg (<25):")
+    print(f"  Válido: {valido}, Mensagem: {msg}")
