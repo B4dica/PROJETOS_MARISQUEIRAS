@@ -1,6 +1,6 @@
 class Pedido:
     def __init__(self):
-        self.id_pedido = None  # será definido externamente
+        self.id_pedido = 0  # será definido externamente
         self.endereco_entrega = ""
         self.tempo_entrega = ""
         self.status_pedido = "Recebido"  # Recebido, Aceito, Rejeitado, Ajuste Solicitado, Em Preparo, Em Curso, Finalizado

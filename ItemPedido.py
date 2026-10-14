@@ -1,6 +1,6 @@
 class ItemPedido:
     def __init__(self):
-        self.id_pedido = None   # Pedido ao qual o item pertence
+        self.id_pedido = 0  # Pedido ao qual o item pertence
         self.id_produto = None  # Produto que participa do pedido
         self.quantidade = 0     # Quantidade solicitada do produto, em kg
 
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     from Produto import Produto
     # criar produto de exemplo
     prod = Produto()
-    prod.cadastrar_produto(name="Siri", categoria="congelado", preco=30.0, quantidade_disponivel=50)
+    prod.cadastrar_produto(nome="Siri", categoria="congelado", preco=30.0, quantidade_disponivel=50)
     # criar item
     item = ItemPedido()
     item.id_pedido = 2001  # simulando definição externa
